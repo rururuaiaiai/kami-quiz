@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#a43830">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="神様の名前、読めますか？ 〜日本神話の漢字クイズ〜">
+  <meta name="twitter:description" content="この漢字読めますか？日本神話の神様クイズに挑戦！">
+  <meta name="twitter:image" content="https://kami-quiz.vercel.app/og-image.png">
+  <meta name="twitter:image:alt" content="神様の名前、読めますか？ 日本神話の漢字クイズ。百柱の神様から五つの出会い。">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:site_name" content="やおよろず">
+  <meta property="og:url" content="https://kami-quiz.vercel.app/">
+  <meta property="og:title" content="神様の名前、読めますか？ 〜日本神話の漢字クイズ〜">
+  <meta property="og:description" content="この漢字読めますか？日本神話の神様クイズに挑戦！">
+  <meta property="og:image" content="https://kami-quiz.vercel.app/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="神様の名前、読めますか？ 日本神話の漢字クイズ。百柱の神様から五つの出会い。">
+  <meta name="description" content="100柱の日本の神様から、毎回5問。漢字の読みと神話の小さな物語を楽しむ4択クイズ。">
+  <title>神様の名前、読めますか？ 〜日本神話の漢字クイズ〜</title>
+  <style>
+    :root{color-scheme:light;--paper:#f6f3ec;--ink:#302e29;--muted:#736e64;--red:#a43830;--line:#e4dfd4;--green:#386550;--serif:"Yu Mincho","Hiragino Mincho ProN","Noto Serif JP",serif}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:"Yu Gothic","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;font-size:14px;line-height:1.8;border-top:5px solid var(--red)}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.25;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23887961' opacity='.15' filter='url(%23n)' d='M0 0h160v160H0z'/%3E%3C/svg%3E")}
+    button,a{-webkit-tap-highlight-color:transparent}button{font:inherit;cursor:pointer}a{color:var(--red)}button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #aa762b;outline-offset:5px}[hidden]{display:none!important}
+    .site-header{max-width:1120px;margin:auto;padding:23px 32px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);gap:16px}.brand{display:flex;align-items:center;gap:12px;font-family:var(--serif);font-weight:700;letter-spacing:.15em}.brand svg{width:29px;height:29px;color:var(--red)}.header-note{font-size:11px;letter-spacing:.16em;color:var(--muted)}
+    main{max-width:824px;margin:auto;padding:37px 24px 0}.intro{text-align:center;position:relative;margin-bottom:31px}.eyebrow{color:var(--red);font-size:11px;letter-spacing:.28em;font-weight:700;margin:0 0 12px}.intro h1{font-family:var(--serif);font-size:clamp(25px,4.7vw,38px);font-weight:600;letter-spacing:.06em;line-height:1.6;margin:0}.subtitle{font-family:var(--serif);letter-spacing:.16em;margin:7px 0 16px;color:#615b52;font-size:14px}.intro-copy{font-size:12px;color:var(--muted);margin:0}.intro-copy span{display:inline-block}.mini-rule{width:28px;height:2px;background:var(--red);margin:20px auto 0}
+    .quiz-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px;gap:12px;font-size:12px}.quiz-top strong{font-family:var(--serif);font-weight:600;font-size:16px}.quiz-top strong span{font-size:24px;color:var(--red);margin:0 5px}.quiz-top small{color:var(--muted);font-size:11px}.progress{display:flex;gap:7px;margin-bottom:19px}.step{height:4px;background:#e4ded1;flex:1;border-radius:1px}.step.current{background:var(--red)}.step.done{background:#bba47c}
+    .card{background:#fffefa;border:1px solid var(--line);box-shadow:0 8px 30px #51452f06;padding:33px 40px 31px;position:relative;border-radius:3px}.card:before,.card:after{content:"";position:absolute;width:11px;height:11px;border-color:#bd9c62;border-style:solid;pointer-events:none}.card:before{top:9px;left:9px;border-width:1px 0 0 1px}.card:after{bottom:9px;right:9px;border-width:0 1px 1px 0}.question-heading{text-align:center;margin:0 0 24px;outline:none}.question-tag{display:block;font-size:10px;letter-spacing:.22em;font-weight:400;color:var(--muted);margin-bottom:13px}.god-name{display:block;font-family:var(--serif);font-weight:600;font-size:clamp(27px,5.2vw,46px);line-height:1.65;letter-spacing:.12em;overflow-wrap:anywhere}.god-name.long{font-size:clamp(23px,4vw,32px);letter-spacing:.04em}.question-line{display:block;font-weight:400;font-size:13px;color:var(--muted);margin-top:9px;letter-spacing:.06em}
+    .choices{display:grid;grid-template-columns:1fr 1fr;gap:12px}.choice{width:100%;display:flex;align-items:center;gap:13px;text-align:left;min-height:68px;padding:14px 16px;background:#fffefa;color:var(--ink);border:1px solid #ded8ca;border-radius:3px;transition:background .15s,border-color .15s,transform .15s}.choice-letter{font-family:Georgia,serif;color:#8c806a;font-size:13px;border-right:1px solid var(--line);padding-right:12px;flex-shrink:0}.choice-reading{font-size:14px;overflow-wrap:anywhere;line-height:1.65;flex:1}.choice-mark{font-size:16px;flex-shrink:0}.choice:disabled{cursor:default;opacity:1}.choice.correct{border-color:var(--green);background:#eef4ed;color:#284c3b}.choice.wrong{border-color:var(--red);background:#fcf0ec;color:var(--red)}.choice.dim{color:#857f73;background:#f8f6f0}.answer-hint{text-align:center;color:var(--muted);font-size:11px;margin:18px 0 0;letter-spacing:.06em}
+    .feedback{margin-top:24px;padding-top:21px;border-top:1px solid var(--line)}.judgment{font-family:var(--serif);color:var(--green);font-weight:700;font-size:20px;margin:0 0 8px}.judgment.incorrect{color:var(--red)}.reading-answer{margin:0 0 12px;font-size:13px;overflow-wrap:anywhere}.lore{background:#f6f3ec;padding:17px 20px;border-left:2px solid #bc9c62}.lore-label{font-size:10px;color:#7a6543;letter-spacing:.16em}.lore p{margin:5px 0 0;font-size:13px;line-height:1.95}.primary,.share{display:flex;align-items:center;justify-content:center;gap:20px;width:100%;min-height:52px;border-radius:3px;text-decoration:none;font-size:14px;letter-spacing:.07em}.primary{background:var(--red);color:#fff;border:1px solid var(--red);margin-top:22px}.primary span{margin-left:auto}.primary.next{justify-content:space-between;padding:10px 21px}.support-row{display:flex;justify-content:center;gap:25px;margin:22px 0 27px;color:var(--muted);font-size:11px;letter-spacing:.03em}.support-row span+span{border-left:1px solid #d8d0c1;padding-left:25px}
+    .result{text-align:center}.result-kicker{font-size:11px;color:var(--red);letter-spacing:.22em;margin:0 0 6px}.result h2{font-family:var(--serif);font-size:24px;margin:0;outline:none}.score{font-family:Georgia,serif;font-size:76px;color:var(--red);line-height:1.2;margin:20px 0 12px}.score small{font-size:23px;color:var(--muted)}.rank{display:inline-block;font-family:var(--serif);border-top:1px solid #c6af83;border-bottom:1px solid #c6af83;padding:10px 18px;font-size:21px;color:#755e36;letter-spacing:.05em;margin:0}.result-message{font-size:13px;color:var(--muted);margin:18px 0 24px}.share{background:#292925;color:white;border:1px solid #292925}.retry{margin-top:12px}.review{text-align:left;margin:24px 0 0;border-top:1px solid var(--line);padding-top:15px}.review summary{cursor:pointer;font-size:12px;color:var(--muted)}.review ol{padding:0;list-style:none;margin:10px 0 0}.review li{padding:12px 0;border-bottom:1px solid var(--line);font-size:12px}.review strong{display:block;overflow-wrap:anywhere}.review p{margin:4px 0;color:var(--muted)}.review .ok{color:var(--green)}.review .ng{color:var(--red)}
+    .ad-space{height:90px;width:100%;display:flex;align-items:center;justify-content:center;border:1px dashed #dcd5c7;background:#efebe340;color:#938a7a;font-size:9px;letter-spacing:.24em;margin:0 auto 25px}.site-footer{max-width:824px;margin:auto;text-align:center;padding:0 24px 27px;color:var(--muted);font-size:10px}.site-footer p{margin:6px 0}.site-footer a{text-underline-offset:3px;color:var(--muted)}.footer-sign{margin-top:18px!important;letter-spacing:.22em;color:#948774}.noscript{padding:20px;border:1px solid var(--red);color:var(--red);text-align:center}
+    .question-share{margin-top:18px;padding:10px 14px;gap:10px;font-size:13px;letter-spacing:.03em}
+    .share-preview{margin:22px 0 0}.share-preview canvas{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:3px}.share-preview figcaption{font-size:11px;color:var(--muted);margin-top:9px}.image-download{display:flex;justify-content:center;align-items:center;min-height:48px;margin-top:12px;padding:10px;border:1px solid #b9a37e;border-radius:3px;text-decoration:none;color:#755e36;font-size:13px}.image-download:hover{background:#f6f0e4}.image-status{font-size:12px;color:var(--muted);margin:8px 0 0}
+    @media(hover:hover){.choice:not(:disabled):hover{background:#f9f1e8;border-color:#b99c74;transform:translateY(-1px)}.primary:hover{background:#892b25}.share:hover{background:#45453e}}
+    @media(max-width:600px){.site-header{padding:18px 20px}.header-note{font-size:9px;letter-spacing:.05em}.brand{font-size:13px}.brand svg{width:24px}main{padding:28px 18px 0}.intro{margin-bottom:25px}.intro h1{letter-spacing:.01em}.subtitle{font-size:12px;letter-spacing:.07em}.intro-copy{font-size:11px}.card{padding:27px 20px 25px}.choices{grid-template-columns:1fr;gap:10px}.choice{min-height:58px}.question-heading{margin-bottom:23px}.god-name{font-size:34px}.god-name.long{font-size:26px}.support-row{gap:14px;font-size:10px}.support-row span+span{padding-left:14px}.rank{font-size:19px}.lore{padding:14px 16px}.ad-space{height:70px}}
+    @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand"><svg viewBox="0 0 40 40" fill="currentColor" aria-hidden="true"><path d="M3 6Q20 10 37 6v5Q20 14 3 11zM6 16h28v4H6zM10 12h5l-1 23H9zM25 12h5l1 23h-5zM18 12h4v6h-4z"/></svg>やおよろず</div>
+    <span class="header-note">日本の神様と、ことばの旅。</span>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="app-title">
+      <p class="eyebrow">知るほど、神話はおもしろい。</p>
+      <h1 id="app-title">神様の名前、読めますか？</h1>
+      <p class="subtitle">〜日本神話の漢字クイズ〜</p>
+      <p class="intro-copy"><span>百柱の神様から、五つの出会い。</span> <span>名前の先にある物語を、のぞいてみましょう。</span></p>
+      <div class="mini-rule" aria-hidden="true"></div>
+    </section>
+    <noscript><p class="noscript">クイズを遊ぶには、ブラウザのJavaScriptを有効にしてください。</p></noscript>
+    <section id="quiz" hidden aria-label="神様の読み方クイズ">
+      <div class="quiz-top"><strong id="progress-label"></strong><small>全100柱からランダム出題</small></div>
+      <div class="progress" id="progress" role="progressbar" aria-label="回答済みの問題数" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"></div>
+      <div class="card">
+        <h2 class="question-heading" id="question" tabindex="-1"><span class="question-tag">この神様のお名前</span><span class="god-name" id="god-name"></span><span class="question-line">の正しい読み方は？</span></h2>
+        <div class="choices" id="choices" role="group" aria-labelledby="question"></div>
+        <p class="answer-hint" id="answer-hint">四つの中から、ひとつお選びください。</p>
+        <div id="announcement" role="status" aria-live="polite" aria-atomic="true"></div>
+        <section class="feedback" id="feedback" hidden aria-label="解答と豆知識">
+          <p class="judgment" id="judgment"></p>
+          <p class="reading-answer" id="reading-answer"></p>
+          <div class="lore"><span class="lore-label">神話のこぼれ話</span><p id="explanation"></p></div>
+          <figure class="share-preview" id="share-preview" hidden>
+            <canvas id="share-canvas" width="1200" height="630" role="img" aria-label="神様の名前と豆知識のシェア画像"></canvas>
+            <figcaption>答えを伏せた、神様の問題カード。画像を保存して、Xの投稿画面で添付できます。リンクのみの投稿には、クイズ共通の画像が表示されます。</figcaption>
+          </figure>
+          <a class="image-download" id="image-download" hidden>問題カードを画像で保存（PNG）</a>
+          <p class="image-status" id="image-status" role="status" hidden></p>
+          <a class="share question-share" id="question-share" target="_blank" rel="noopener noreferrer">この問題を𝕏でシェアする <span aria-hidden="true">↗</span></a>
+          <button class="primary next" id="next" type="button">次の問題へ <span aria-hidden="true">→</span></button>
+        </section>
+      </div>
+    </section>
+    <section class="card result" id="result" hidden aria-label="クイズの結果">
+      <p class="result-kicker">五つの出会いを終えて</p>
+      <h2 id="result-heading" tabindex="-1">あなたの結果</h2>
+      <p class="score"><span id="score">0</span><small> / 5問</small></p>
+      <p class="rank" id="rank"></p>
+      <p class="result-message" id="result-message"></p>
+      <a class="share" id="share" target="_blank" rel="noopener noreferrer">𝕏 で結果を投稿する <span aria-hidden="true">↗</span></a>
+      <button class="primary retry" id="retry" type="button">もう一度、挑戦する <span aria-hidden="true">↻</span></button>
+      <details class="review" id="review"><summary>今回出会った神様を振り返る</summary><ol id="review-list"></ol></details>
+    </section>
+    <div class="support-row"><span>一回五問</span><span>時間制限なし</span><span>何度でも挑戦</span></div>
+    <!-- 広告タグを設置する場合は、この領域内に追加してください。 -->
+    <div class="ad-space" aria-label="広告掲載予定スペース">ADVERTISEMENT</div>
+  </main>
+  <footer class="site-footer">
+    <p>神名の表記・読み・伝承には諸説があります。本クイズでは代表的な一例を採用しています。</p>
+    <p>参考：<a href="https://kojiki.kokugakuin.ac.jp/shinmei/" target="_blank" rel="noopener noreferrer">國學院大學「神名データベース」</a></p>
+    <p class="footer-sign">やおよろず ― 日本神話の漢字クイズ</p>
+  </footer>
+  <script>
+    'use strict';
+    // 公開先を固定したい場合のみ、https:// から始まるURLを設定してください。
+    // 空欄なら現在のページURLを使用します（クエリとハッシュは除外）。
+    const APP_URL = 'https://kami-quiz.vercel.app/';
+    const TOTAL_QUESTIONS = 5;
+    // 古事記の神名を中心に選んだ100柱。別名を別の神として重複登録しない構成。
+    // 各行：[名前, 採用するひらがな読み, 豆知識・由来]。解説は本アプリ向けの要約。
+    const GODS = [
+      ['天照大御神','あまてらすおおみかみ','太陽の神で、高天原を治める神様。天の岩屋に隠れると、世界が暗闇に包まれたと語られます。'],
+      ['月読命','つくよみのみこと','伊耶那岐神が右の目を洗ったときに生まれた神。夜の世界を治めるよう命じられます。'],
+      ['建速須佐之男命','たけはやすさのおのみこと','出雲で八俣遠呂智を退治した神。大蛇の尾から見つかった剣は、草薙の剣として知られます。'],
+      ['伊耶那岐神','いざなきのかみ','伊耶那美神とともに国生みをした神。黄泉の国から戻った後の禊で、多くの神々が生まれます。'],
+      ['伊耶那美神','いざなみのかみ','伊耶那岐神と島々や神々を生んだ神。火の神の出産で命を落とし、黄泉の国の物語へとつながります。'],
+      ['天之御中主神','あめのみなかぬしのかみ','古事記の冒頭で、高天原に最初に現れる神。天地の始まりを告げる、別天神の一柱です。'],
+      ['高御産巣日神','たかみむすひのかみ','天地の初めに現れる別天神の一柱。天孫降臨などで、天照大御神とともに重要な役割を担います。'],
+      ['神産巣日神','かむむすひのかみ','別天神の一柱。苦難に遭った大国主神を助けるなど、命を支える働きが語られています。'],
+      ['宇摩志阿斯訶備比古遅神','うましあしかびひこじのかみ','天地がまだ整わないころ、葦の芽のように伸びるものから現れた神。別天神の一柱です。'],
+      ['天之常立神','あめのとこたちのかみ','古事記で五番目に現れる神。天地の初めに姿を現した五柱の別天神の、最後の一柱です。'],
+      ['国之常立神','くにのとこたちのかみ','別天神に続いて現れる神。伊耶那岐神と伊耶那美神へと続く、神世七代の始まりに位置します。'],
+      ['豊雲野神','とよくもののかみ','神世七代の二代目に数えられる神。古事記では、独りで現れて身を隠したと記されています。'],
+      ['宇比地邇神','うひじにのかみ','須比智邇神と対になって登場する神。神世七代のうち、二柱一組で数えられる最初の代です。'],
+      ['須比智邇神','すひちにのかみ','宇比地邇神とともに現れる神。古事記の天地の始まりに登場し、神世七代に数えられます。'],
+      ['角杙神','つのぐいのかみ','活杙神と対になって現れる神。古事記では神世七代の四代目に位置づけられています。'],
+      ['活杙神','いくぐいのかみ','角杙神とともに登場する神。名の「杙」は、地面に打ち込む杭との関わりが論じられています。'],
+      ['意富斗能地神','おおとのじのかみ','大斗乃弁神と対になって現れる神。国生み以前の神世七代に名を連ねます。'],
+      ['大斗乃弁神','おおとのべのかみ','意富斗能地神とともに現れる神。神世七代の五代目として、天地の始まりの系譜に登場します。'],
+      ['於母陀流神','おもだるのかみ','阿夜訶志古泥神と対になって現れる神。神世七代では伊耶那岐神・伊耶那美神の一代前です。'],
+      ['阿夜訶志古泥神','あやかしこねのかみ','於母陀流神とともに登場する神。古事記の神世七代では、六代目の一柱に数えられます。'],
+      ['大国主神','おおくにぬしのかみ','因幡の白兎を助けた物語で知られる神。多くの試練を経て、少名毘古那神と国作りに取り組みます。'],
+      ['少名毘古那神','すくなびこなのかみ','小さな船に乗って海の向こうから来た神。大国主神と力を合わせて国を作ったと語られます。'],
+      ['事代主神','ことしろぬしのかみ','大国主神の子。国譲りの場面で、天つ神に国を譲ることに同意した神として登場します。'],
+      ['建御名方神','たけみなかたのかみ','国譲りの際、建御雷之男神に力比べを挑んだ神。敗れた後、信濃の諏訪まで退いたとされます。'],
+      ['建御雷之男神','たけみかずちのおのかみ','国譲りのために出雲へ遣わされた神。波の上に剣を逆さに立て、その切っ先に座ったと語られます。'],
+      ['天宇受売命','あめのうずめのみこと','天の岩屋の前で舞い、神々の笑いを誘った神。そのにぎわいが、天照大御神を外へ導くきっかけになります。'],
+      ['天手力男神','あめのたぢからおのかみ','天照大御神が岩屋から顔を出したとき、その手を取って引き出した力強い神です。'],
+      ['思金神','おもいかねのかみ','天照大御神を岩屋から迎え出す方法を考えた知恵の神。神々の相談の場で活躍します。'],
+      ['天児屋命','あめのこやねのみこと','天の岩屋の前で祝詞を唱えた神。天孫降臨にも付き従う神として名が挙げられています。'],
+      ['布刀玉命','ふとだまのみこと','天の岩屋の物語で、祭りのための榊を持つなどの役割を担う神。天児屋命とともに祭祀に関わります。'],
+      ['伊斯許理度売命','いしこりどめのみこと','天照大御神を岩屋から迎え出すために、鏡を作る役割を担った神。鏡作りの祖神とされます。'],
+      ['玉祖命','たまのおやのみこと','天の岩屋の祭りに用いる玉を作った神。玉作りの仕事に関わる祖神として語られます。'],
+      ['天津麻羅','あまつまら','天の岩屋の物語に登場する鍛冶の神。天照大御神を迎え出すための準備に加わります。'],
+      ['猿田毘古神','さるたびこのかみ','天孫降臨の際、天と地の道の分かれ目に現れた神。天孫一行の道案内を務めます。'],
+      ['邇邇芸命','ににぎのみこと','天照大御神の孫にあたる神。高天原から地上へ降りる「天孫降臨」の中心となります。'],
+      ['木花之佐久夜毘売','このはなのさくやびめ','大山津見神の娘で、邇邇芸命の妻。燃える産屋で子を産むという物語が伝わります。'],
+      ['石長比売','いわながひめ','木花之佐久夜毘売の姉。父は石のように長く続く命を願って、姉妹を邇邇芸命へ送りました。'],
+      ['火遠理命','ほおりのみこと','山幸彦として知られる神。兄の釣り針を探すために海神の宮へ行き、豊玉毘売と出会います。'],
+      ['火照命','ほでりのみこと','海幸彦として知られる神。弟の山幸彦と猟具を交換したことから、失われた釣り針の物語が始まります。'],
+      ['火須勢理命','ほすせりのみこと','木花之佐久夜毘売が火の燃える産屋で産んだ三柱の一柱。火照命・火遠理命の兄弟です。'],
+      ['豊玉毘売','とよたまびめ','海神の娘で、山幸彦の妻となった神。出産の姿を見ないでほしいと頼む物語で知られます。'],
+      ['玉依毘売','たまよりびめ','豊玉毘売の妹。姉の子を養育し、のちに神武天皇となる子を産んだと語られています。'],
+      ['鵜葺草葺不合命','うがやふきあえずのみこと','山幸彦と豊玉毘売の子。産屋の屋根を鵜の羽で葺き終える前に生まれたことが名の由来とされます。'],
+      ['大山津見神','おおやまつみのかみ','伊耶那岐神と伊耶那美神の神生みで生まれる山の神。木花之佐久夜毘売や石長比売の父です。'],
+      ['大綿津見神','おおわたつみのかみ','伊耶那岐神と伊耶那美神の間に生まれる海の神。神生みの物語では、海をつかさどる存在です。'],
+      ['宇迦之御魂神','うかのみたまのかみ','須佐之男命と神大市比売の子。名の「うか」は食物・穀物に関わるとされ、稲荷信仰でも知られます。'],
+      ['豊宇気毘売神','とようけびめのかみ','食物に関わる神。古事記では、伊耶那美神から生まれた和久産巣日神の子とされています。'],
+      ['大宜都比売神','おおげつひめのかみ','食物を用意する神。古事記では、その体から蚕やさまざまな穀物が生じたと語られます。'],
+      ['火之迦具土神','ひのかぐつちのかみ','伊耶那岐神と伊耶那美神の間に生まれた火の神。その誕生は、伊耶那美神の死につながります。'],
+      ['金山毘古神','かなやまびこのかみ','伊耶那美神が火の神を産んで苦しむときに生まれた神。金山毘売神とともに鉱山・金属に関わる神とされます。'],
+      ['金山毘売神','かなやまびめのかみ','金山毘古神と対になって生まれる神。名の「金山」から、鉱石や金属との関わりが考えられています。'],
+      ['波邇夜須毘古神','はにやすびこのかみ','火の神を産んで苦しむ伊耶那美神から生まれた神。「はに」は埴、つまり粘土に関わる語とされます。'],
+      ['波邇夜須毘売神','はにやすびめのかみ','波邇夜須毘古神とともに現れる土に関わる神。神生みの終わりに近い場面で登場します。'],
+      ['弥都波能売神','みづはのめのかみ','伊耶那美神が苦しむ中で生まれた、水に関わる神。和久産巣日神と同じ場面で登場します。'],
+      ['和久産巣日神','わくむすひのかみ','伊耶那美神から生まれた神。食物の神である豊宇気毘売神の親として、古事記に記されています。'],
+      ['久々能智神','くくのちのかみ','神生みの物語で生まれる木の神。海・風・山・野などとともに、自然を形づくる神々の一柱です。'],
+      ['鹿屋野比売神','かやのひめのかみ','草や野に関わる神で、野椎神という別名もあります。大山津見神とともに多くの神を生みます。'],
+      ['志那都比古神','しなつひこのかみ','伊耶那岐神と伊耶那美神から生まれる風の神。古事記では、木の神に先立って登場します。'],
+      ['鳥之石楠船神','とりのいわくすふねのかみ','神生みで生まれた船の神。天鳥船神とも呼ばれ、国譲りの物語にも登場します。'],
+      ['大戸日別神','おおとひわけのかみ','伊耶那岐神と伊耶那美神の神生みに登場する神。古事記では、天の吹男神に続いて生まれます。'],
+      ['大年神','おおとしのかみ','須佐之男命と神大市比売の子で、宇迦之御魂神の兄。穀物の実りと関わる神とされています。'],
+      ['御年神','みとしのかみ','大年神と香用比売の間に生まれた神。名の「年」は穀物の実りと関わると考えられています。'],
+      ['若年神','わかとしのかみ','大年神の子である羽山戸神と、大気都比売神の間に生まれる神。穀物の成長を思わせる名を持ちます。'],
+      ['大山咋神','おおやまくいのかみ','大年神の子。古事記では、近江の比叡山や葛野の松尾に鎮まる神と記されています。'],
+      ['奥津日子神','おくつひこのかみ','大年神の子で、奥津比売命とともに登場する神。かまどの火と関わる神として知られます。'],
+      ['奥津比売命','おくつひめのみこと','大年神の子で、大戸比売神とも呼ばれます。古事記では、人々が祀るかまどの神と説明されています。'],
+      ['大土神','おおつちのかみ','大年神の子で、奥津比売命に続いて名が挙がる神。土や土地との関わりが考えられています。'],
+      ['羽山戸神','はやまとのかみ','大年神の子。大気都比売神との間に、若年神や夏之売神などの神々を生みます。'],
+      ['庭津日神','にわつひのかみ','大年神と天知迦流美豆比売の間に生まれた神。大年神の系譜に登場する一柱です。'],
+      ['阿須波神','あすはのかみ','大年神の子として登場する神。波比岐神と並び、家や屋敷を守る祭りとの関わりが知られます。'],
+      ['櫛名田比売','くしなだひめ','八俣遠呂智の犠牲になるところを、須佐之男命に救われた神。戦いの際には櫛の姿に変えられます。'],
+      ['足名椎','あしなづち','櫛名田比売の父。八俣遠呂智に娘たちを奪われた事情を、訪れた須佐之男命に語ります。'],
+      ['手名椎','てなづち','足名椎の妻で、櫛名田比売の母。出雲の肥河のほとりで、娘を挟んで泣く姿で登場します。'],
+      ['須勢理毘売','すせりびめ','須佐之男命の娘で、大国主神の妻。根の国で課される危険な試練から、大国主神を助けます。'],
+      ['八上比売','やがみひめ','因幡の神。大国主神の兄たちから求婚されますが、白兎を助けた大国主神を選んだと語られます。'],
+      ['沼河比売','ぬなかわひめ','高志の国の神で、大国主神が求婚した相手。古事記には、二柱が交わした歌が記されています。'],
+      ['神大市比売','かむおおいちひめ','大山津見神の娘で、須佐之男命の妻。大年神と宇迦之御魂神を産んだとされています。'],
+      ['多紀理毘売命','たきりびめのみこと','天照大御神と須佐之男命の誓約で生まれた宗像三女神の一柱。沖つ宮に鎮まると語られます。'],
+      ['市寸島比売命','いちきしまひめのみこと','宗像三女神の一柱。古事記では、天照大御神と須佐之男命の誓約の際、剣から生まれる神です。'],
+      ['多岐都比売命','たきつひめのみこと','宗像三女神の一柱。古事記の誓約の場面で、須佐之男命の剣から生まれる三柱の最後に登場します。'],
+      ['正勝吾勝勝速日天之忍穂耳命','まさかつあかつかちはやひあめのおしほみみのみこと','天照大御神と須佐之男命の誓約で生まれる神。天孫降臨をする邇邇芸命の父にあたります。'],
+      ['天之菩卑能命','あめのほひのみこと','誓約の際に天照大御神の玉から生まれた神。地上へ遣わされますが、大国主神に従い復命しなかったとされます。'],
+      ['天津日子根命','あまつひこねのみこと','天照大御神と須佐之男命の誓約で生まれた五柱の男神の一柱。古事記では多くの氏族の祖とされます。'],
+      ['活津日子根命','いくつひこねのみこと','誓約によって、天照大御神の玉から生まれた男神の一柱。天津日子根命に続いて名が挙がります。'],
+      ['熊野久須毘命','くまのくすびのみこと','天照大御神と須佐之男命の誓約で生まれる五柱の男神の一柱。五柱の最後に登場します。'],
+      ['天若日子','あめわかひこ','地上の国を治めるために遣わされた神。大国主神の娘と結婚し、天へ報告をしないまま年月を過ごします。'],
+      ['下光比売命','したでるひめのみこと','大国主神の娘で、天若日子の妻。夫の死を嘆く声が、高天原まで届いたと語られています。'],
+      ['阿遅志貴高日子根神','あじしきたかひこねのかみ','大国主神の子。天若日子の葬儀で故人と間違われ、怒って喪屋を切り倒す物語が伝わります。'],
+      ['久延毘古','くえびこ','田に立つかかしの神。歩くことはできませんが、世の中のことを広く知っていると語られます。'],
+      ['大物主神','おおものぬしのかみ','大国主神の国作りを助ける存在として、海を照らして現れる神。三輪山に祀られる神として知られます。'],
+      ['底津綿津見神','そこつわたつみのかみ','伊耶那岐神が水の底で身を洗ったときに生まれた神。綿津見三神の一柱です。'],
+      ['中津綿津見神','なかつわたつみのかみ','伊耶那岐神が水の中ほどで身を洗ったときに生まれた神。底津・上津の綿津見神とともに登場します。'],
+      ['上津綿津見神','うえつわたつみのかみ','伊耶那岐神が水の上の方で身を洗ったときに生まれた神。海と関わる綿津見三神の一柱です。'],
+      ['底箇之男命','そこつつのおのみこと','伊耶那岐神の禊で、水の底から生まれた神。中箇之男命・上箇之男命とともに住吉三神とされます。'],
+      ['中箇之男命','なかつつのおのみこと','伊耶那岐神の禊で、水の中ほどから生まれた神。古事記では住吉に祀られる三柱の一柱です。'],
+      ['上箇之男命','うわつつのおのみこと','伊耶那岐神の禊で、水の上の方から生まれた神。住吉三神の一柱として知られます。'],
+      ['泣沢女神','なきさわめのかみ','伊耶那美神の死を悲しんだ伊耶那岐神の涙から生まれた神。香山のふもとに鎮まるとされます。'],
+      ['意富加牟豆美命','おおかむずみのみこと','黄泉の国から逃げる伊耶那岐神を助けた桃の実に与えられた名。苦しむ人々を助けるよう託されます。'],
+      ['道反之大神','ちがえしのおおかみ','黄泉の国と地上の境をふさいだ大岩の神名。伊耶那岐神と伊耶那美神の別れの場面に登場します。'],
+      ['塩椎神','しおつちのかみ','失った釣り針を探して困る山幸彦を助けた神。小舟を作り、海神の宮へ向かう方法を教えます。']
+    ].map(([name, reading, description]) => Object.freeze({name, reading, description}));
+    const RANKS = [
+      ['神話の旅 はじまり級','今日の五柱との出会いが、最初の一歩。'],
+      ['神話の旅人級','ひとつの名前から、物語が広がります。'],
+      ['神様の名前 見習い級','神様たちの名前が、少し身近になりましたね。'],
+      ['神話の語り部級','なかなかの読み手。次は、さらなる高みへ。'],
+      ['神様の名前 達人級','お見事！ 八百万の神マスターまで、あと一歩。'],
+      ['八百万の神マスター級','全問正解、お見事です。神話の世界を、もっと深く。']
+    ];
+    const $ = id => document.getElementById(id);
+    let questions = [], current = 0, score = 0, answered = false, history = [];
+
+    // Fisher–Yates：元の配列を変更せずにシャッフル。
+    function shuffle(items) {
+      const copy = [...items];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+    function makeChoices(god) {
+      const otherReadings = [...new Set(GODS.map(item => item.reading))].filter(reading => reading !== god.reading);
+      return shuffle([god.reading, ...shuffle(otherReadings).slice(0, 3)]);
+    }
+    function updateProgress() {
+      $('progress').setAttribute('aria-valuenow', history.length);
+      $('progress').setAttribute('aria-valuetext', `${TOTAL_QUESTIONS}問中${history.length}問回答済み`);
+      $('progress').replaceChildren(...questions.map((_, i) => {
+        const step = document.createElement('span');
+        step.className = 'step' + (i < history.length ? ' done' : i === current ? ' current' : '');
+        step.setAttribute('aria-hidden', 'true');
+        return step;
+      }));
+    }
+    function renderQuestion(focus = true) {
+      answered = false;
+      const god = questions[current];
+      $('progress-label').innerHTML = `第<span>${current + 1}</span>問 / ${TOTAL_QUESTIONS}問`;
+      updateProgress();
+      $('god-name').textContent = `「${god.name}」`;
+      $('god-name').classList.toggle('long', god.name.length > 8);
+      $('feedback').hidden = true;
+      $('question-share').removeAttribute('href');
+      $('share-preview').hidden = true;
+      $('image-download').hidden = true;
+      $('image-download').removeAttribute('href');
+      $('image-status').hidden = true;
+      $('answer-hint').hidden = false;
+      $('announcement').textContent = '';
+      $('choices').replaceChildren(...makeChoices(god).map((reading, index) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'choice';
+        button.dataset.reading = reading;
+        const letter = document.createElement('span');
+        letter.className = 'choice-letter';
+        letter.textContent = 'ABCD'[index];
+        letter.setAttribute('aria-hidden', 'true');
+        const text = document.createElement('span');
+        text.className = 'choice-reading';
+        text.textContent = reading;
+        button.append(letter, text);
+        button.addEventListener('click', () => answer(reading));
+        return button;
+      }));
+      if (focus) $('question').focus({preventScroll:true});
+    }
+    function answer(reading) {
+      if (answered) return; // 連打・二重加点を防止。
+      answered = true;
+      const god = questions[current];
+      const correct = reading === god.reading;
+      if (correct) score++;
+      history.push({god, selected:reading, correct});
+      for (const button of $('choices').children) {
+        button.disabled = true;
+        const isCorrect = button.dataset.reading === god.reading;
+        const isSelected = button.dataset.reading === reading;
+        button.classList.add(isCorrect ? 'correct' : isSelected ? 'wrong' : 'dim');
+        if (isCorrect || isSelected) {
+          const mark = document.createElement('span');
+          mark.className = 'choice-mark';
+          mark.textContent = isCorrect ? '○' : '×';
+          mark.setAttribute('aria-hidden','true');
+          button.append(mark);
+        }
+        button.setAttribute('aria-label', `${button.dataset.reading}${isCorrect ? '、正解' : ''}${isSelected ? '、あなたの回答' : ''}`);
+      }
+      $('judgment').textContent = correct ? '○ 正解です！' : '× 惜しい！';
+      $('judgment').classList.toggle('incorrect', !correct);
+      $('reading-answer').textContent = `正しい読み：${god.reading}`;
+      $('explanation').textContent = god.description;
+      updateShareCard(god);
+      const questionIntent = new URL('https://twitter.com/intent/tweet');
+      questionIntent.searchParams.set('text', `『${god.name}』← この神様の名前、読めますか？\n【豆知識】${god.description}\n正解はこちらでチェック👇`);
+      questionIntent.searchParams.set('url', getShareUrl());
+      questionIntent.searchParams.set('hashtags', '日本神話,漢字クイズ');
+      $('question-share').href = questionIntent.href;
+      $('announcement').textContent = `${correct ? '正解です。' : '不正解です。'}正しい読みは、${god.reading}。`;
+      // ライブ通知は読み上げ専用。視覚上の判定はfeedbackへ表示。
+      $('feedback').hidden = false;
+      $('answer-hint').hidden = true;
+      $('next').innerHTML = `${current === TOTAL_QUESTIONS - 1 ? '結果を見る' : '次の問題へ'} <span aria-hidden="true">→</span>`;
+      updateProgress();
+      $('next').focus({preventScroll:true});
+    }
+    // Canvasはブラウザ内の画像。Xのリンクプレビューには別途公開する
+    // og-image.pngを使用します。個別カードは保存して投稿へ手動添付できます。
+    function drawShareCard(canvas, god = null) {
+      const ctx = canvas.getContext('2d');
+      if (!ctx) throw new Error('Canvas is unavailable');
+      const W = 1200, H = 630;
+      canvas.width = W; canvas.height = H;
+      const serif = '"Yu Mincho", "Hiragino Mincho ProN", serif';
+      const sans = '"Yu Gothic", Meiryo, sans-serif';
+      ctx.fillStyle = '#f6f3ec'; ctx.fillRect(0, 0, W, H);
+      // 控えめな和紙の繊維模様（外部画像を使わず、PNG保存もオフライン対応）。
+      ctx.strokeStyle = 'rgba(130,106,66,.07)'; ctx.lineWidth = 1;
+      for (let y = 8; y < H; y += 9) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y + 5); ctx.stroke();
+      }
+      ctx.fillStyle = '#a43830'; ctx.fillRect(0, 0, W, 12);
+      ctx.strokeStyle = '#b89a66'; ctx.lineWidth = 1.5; ctx.strokeRect(30, 30, W - 60, H - 60);
+      ctx.fillStyle = '#a43830'; ctx.beginPath(); ctx.arc(1060, 141, 90, 0, Math.PI * 2); ctx.fill();
+      // 朱い日輪に鳥居。
+      ctx.save(); ctx.translate(1007, 84); ctx.fillStyle = '#f6f3ec';
+      ctx.beginPath(); ctx.moveTo(0, 0); ctx.quadraticCurveTo(53, 14, 106, 0);
+      ctx.lineTo(103, 12); ctx.quadraticCurveTo(53, 25, 3, 12); ctx.closePath(); ctx.fill();
+      ctx.fillRect(10, 36, 86, 8); ctx.fillRect(23, 18, 10, 90); ctx.fillRect(73, 18, 10, 90); ctx.fillRect(49, 20, 8, 18); ctx.restore();
+      ctx.textAlign = 'left'; ctx.textBaseline = 'top'; ctx.fillStyle = '#a43830';
+      ctx.font = `600 23px ${sans}`; ctx.fillText('やおよろず  /  日本神話の漢字クイズ', 76, 63);
+      ctx.fillStyle = '#716758'; ctx.font = `24px ${sans}`;
+      ctx.fillText(god ? 'この神様の名前、読めますか？' : '百柱の神様から、五つの出会い。', 76, 118);
+      const heading = god ? god.name : '神様の名前、読めますか？';
+      let titleSize = god ? 82 : 62;
+      do { ctx.font = `600 ${titleSize}px ${serif}`; if (ctx.measureText(heading).width <= 1020) break; titleSize--; } while (titleSize > 24);
+      const titleWidth = ctx.measureText(heading).width;
+      ctx.fillStyle = '#302e29'; ctx.fillText(heading, 76, 226);
+      ctx.fillStyle = '#a43830'; ctx.fillRect(76, 337, 45, 3);
+      ctx.font = `600 21px ${sans}`; ctx.fillText(god ? '神話のこぼれ話' : '一回五問 · 四択クイズ · 時間制限なし', 76, 362);
+      const description = god ? god.description : '名前の先にある物語を、のぞいてみましょう。\nあなたはいくつ、読めますか？';
+      // 文字単位で折り返し、長い神名や解説でもカードの枠内に収める。
+      function wrap(text, maxWidth) {
+        const lines = []; let line = '';
+        for (const char of text) {
+          if (char === '\n') { lines.push(line); line = ''; continue; }
+          if (line && ctx.measureText(line + char).width > maxWidth) { lines.push(line); line = char; }
+          else line += char;
+        }
+        if (line) lines.push(line);
+        return lines;
+      }
+      let bodySize = 26, lines;
+      do { ctx.font = `${bodySize}px ${sans}`; lines = wrap(description, 1048); if (lines.length * bodySize * 1.55 <= 132) break; bodySize--; } while (bodySize > 14);
+      ctx.fillStyle = '#534e45'; lines.forEach((line, i) => ctx.fillText(line, 76, 403 + i * bodySize * 1.55));
+      ctx.fillStyle = '#a43830'; ctx.fillRect(30, 557, 1140, 43);
+      ctx.fillStyle = '#fffefa'; ctx.font = `20px ${sans}`;
+      ctx.fillText('正解は、クイズで。', 76, 566);
+      ctx.textAlign = 'right'; ctx.fillText('kami-quiz.vercel.app', 1124, 566);
+      return {titleWidth, bodyBottom:403 + lines.length * bodySize * 1.55};
+    }
+    function updateShareCard(god) {
+      try {
+        const canvas = $('share-canvas');
+        drawShareCard(canvas, god);
+        canvas.setAttribute('aria-label', `${god.name}。この神様の名前、読めますか？ 豆知識：${god.description}`);
+        $('image-download').href = canvas.toDataURL('image/png');
+        $('image-download').download = `神様クイズ-${god.name}.png`;
+        $('share-preview').hidden = false;
+        $('image-download').hidden = false;
+      } catch (error) {
+        $('image-status').textContent = '画像を生成できませんでした。下のボタンから文章とリンクをシェアできます。';
+        $('image-status').hidden = false;
+      }
+    }
+    function getShareUrl() {
+      const pageUrl = new URL(APP_URL || window.location.href);
+      pageUrl.search = '';
+      pageUrl.hash = '';
+      return pageUrl.href;
+    }
+    function showResult() {
+      $('quiz').hidden = true;
+      $('result').hidden = false;
+      const [rank, message] = RANKS[score];
+      $('score').textContent = score;
+      $('rank').textContent = rank;
+      $('result-message').textContent = message;
+      const intent = new URL('https://twitter.com/intent/tweet');
+      intent.searchParams.set('text', `『神様の名前、読めますか？』\n${TOTAL_QUESTIONS}問中${score}問正解！ 称号は「${rank}」でした。\nあなたも日本神話の漢字クイズに挑戦！`);
+      intent.searchParams.set('url', getShareUrl());
+      intent.searchParams.set('hashtags', '神様の名前読めますか,日本神話');
+      $('share').href = intent.href;
+      $('review').open = false;
+      $('review-list').replaceChildren(...history.map(({god, selected, correct}, index) => {
+        const li = document.createElement('li');
+        const heading = document.createElement('strong');
+        heading.className = correct ? 'ok' : 'ng';
+        heading.textContent = `${correct ? '○' : '×'} 第${index + 1}問　${god.name}（${god.reading}）`;
+        const description = document.createElement('p');
+        description.textContent = god.description;
+        li.append(heading);
+        if (!correct) {
+          const selection = document.createElement('p');
+          selection.textContent = `あなたの回答：${selected}`;
+          li.append(selection);
+        }
+        li.append(description);
+        return li;
+      }));
+      $('result-heading').focus({preventScroll:true});
+      $('result').scrollIntoView({block:'start', behavior:'instant'});
+    }
+    function startQuiz(focus = true) {
+      questions = shuffle(GODS).slice(0, TOTAL_QUESTIONS);
+      current = 0; score = 0; history = [];
+      $('result').hidden = true;
+      $('quiz').hidden = false;
+      renderQuestion(focus);
+      if (focus) $('quiz').scrollIntoView({block:'start', behavior:'instant'});
+    }
+    $('next').addEventListener('click', () => {
+      if (!answered) return;
+      if (current === TOTAL_QUESTIONS - 1) { showResult(); return; }
+      current++;
+      renderQuestion();
+      $('quiz').scrollIntoView({block:'start', behavior:'instant'});
+    });
+    $('retry').addEventListener('click', () => startQuiz());
+    startQuiz(false);
+  </script>
+  <style>#announcement{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}</style>
+</body>
+</html>
