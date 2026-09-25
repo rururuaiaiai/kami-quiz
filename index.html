@@ -72,9 +72,9 @@
           <div class="lore"><span class="lore-label">神話のこぼれ話</span><p id="explanation"></p></div>
           <figure class="share-preview" id="share-preview" hidden>
             <canvas id="share-canvas" width="1200" height="630" role="img" aria-label="神様の名前と豆知識のシェア画像"></canvas>
-            <figcaption>答えを伏せた問題カードです。画像を保存してから、Xの投稿画面で添付してください。</figcaption>
           </figure>
           <a class="image-download" id="image-download" hidden>問題カードを保存（PNG）</a>
+          <p class="image-status" id="image-download-hint" hidden>保存した画像はXの投稿画面で添付できます。</p>
           <p class="image-status" id="image-status" role="status" hidden></p>
           <a class="share question-share" id="question-share" target="_blank" rel="noopener noreferrer">Xで投稿文を開く <span aria-hidden="true">↗</span></a>
           <button class="primary next" id="next" type="button">次の問題へ <span aria-hidden="true">→</span></button>
@@ -258,6 +258,7 @@
       $('share-preview').hidden = true;
       $('image-download').hidden = true;
       $('image-download').removeAttribute('href');
+      $('image-download-hint').hidden = true;
       $('image-status').hidden = true;
       $('answer-hint').hidden = false;
       $('announcement').textContent = '';
@@ -315,7 +316,18 @@
       $('next').focus({preventScroll:true});
     }
     function buildQuestionShareText(god) {
-      return `『${god.name}』\nこの神様のお名前、読めますか？\n\n【豆知識】\n${god.description}\n\n4択から選んで挑戦！正解はこちら👇\n${getShareUrl()}\n\n#日本神話 #漢字クイズ #神クイズ`;
+      return [
+        `『${god.name}』`,
+        'この神様のお名前、読めますか？',
+        '',
+        '【豆知識】',
+        god.description,
+        '',
+        '4択から選んで挑戦！正解はこちら👇',
+        getShareUrl(),
+        '',
+        '#日本神話 #漢字クイズ #神クイズ'
+      ].join('\n');
     }
     function buildQuestionShareIntent(god) {
       const intent = new URL('https://twitter.com/intent/tweet');
@@ -386,6 +398,7 @@
         $('image-download').download = `神様クイズ-${god.name}.png`;
         $('share-preview').hidden = false;
         $('image-download').hidden = false;
+        $('image-download-hint').hidden = false;
       } catch (error) {
         $('image-status').textContent = '画像を生成できませんでした。下のボタンから文章とリンクをシェアできます。';
         $('image-status').hidden = false;
