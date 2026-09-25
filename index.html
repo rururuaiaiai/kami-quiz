@@ -105,11 +105,11 @@
   <script>
     'use strict';
     // 公開先を固定したい場合のみ、https:// から始まるURLを設定してください。
-    // 空欄なら現在のページURLを使用します（クエリとハッシュは除外）。
+    // 空欄なら現在のページURLを使用します（既存のクエリとハッシュは除外）。
     const APP_URL = 'https://kami-quiz.vercel.app/';
     const TOTAL_QUESTIONS = 5;
     // 古事記の神名を中心に選んだ100柱。別名を別の神として重複登録しない構成。
-    // 各行：[名前, 採用するひらがな読み, 豆知識・由来]。解説は本アプリ向けの要約。
+    // 各行：[名前, 採用するひらがな読み, 豆知識・由来]。行番号（1始まり）を共有用IDとして使うため、順序を変えないこと。
     const GODS = [
       ['天照大御神','あまてらすおおみかみ','太陽の神で、高天原を治める神様。天の岩屋に隠れると、世界が暗闇に包まれたと語られます。'],
       ['月読命','つくよみのみこと','伊耶那岐神が右の目を洗ったときに生まれた神。夜の世界を治めるよう命じられます。'],
@@ -211,7 +211,7 @@
       ['意富加牟豆美命','おおかむずみのみこと','黄泉の国から逃げる伊耶那岐神を助けた桃の実に与えられた名。苦しむ人々を助けるよう託されます。'],
       ['道反之大神','ちがえしのおおかみ','黄泉の国と地上の境をふさいだ大岩の神名。伊耶那岐神と伊耶那美神の別れの場面に登場します。'],
       ['塩椎神','しおつちのかみ','失った釣り針を探して困る山幸彦を助けた神。小舟を作り、海神の宮へ向かう方法を教えます。']
-    ].map(([name, reading, description]) => Object.freeze({name, reading, description}));
+    ].map(([name, reading, description], index) => Object.freeze({id:index + 1, name, reading, description}));
     const RANKS = [
       ['神話の旅 はじまり級','今日の五柱との出会いが、最初の一歩。'],
       ['神話の旅人級','ひとつの名前から、物語が広がります。'],
@@ -324,7 +324,7 @@
         god.description,
         '',
         '4択から選んで挑戦！正解はこちら👇',
-        getShareUrl(),
+        getShareUrl(god),
         '',
         '#日本神話 #漢字クイズ #神クイズ'
       ].join('\n');
@@ -404,11 +404,17 @@
         $('image-status').hidden = false;
       }
     }
-    function getShareUrl() {
+    function getShareUrl(god) {
       const pageUrl = new URL(APP_URL || window.location.href);
       pageUrl.search = '';
       pageUrl.hash = '';
+      pageUrl.searchParams.set('q', god.id);
       return pageUrl.href;
+    }
+    function getSharedGodFromUrl() {
+      const id = new URLSearchParams(window.location.search).get('q');
+      if (!id || !/^[1-9]\d*$/.test(id)) return null;
+      return GODS[Number(id) - 1] || null;
     }
     function showResult() {
       $('quiz').hidden = true;
@@ -449,8 +455,10 @@
       $('result-heading').focus({preventScroll:true});
       $('result').scrollIntoView({block:'start', behavior:'instant'});
     }
-    function startQuiz(focus = true) {
-      questions = shuffle(GODS).slice(0, TOTAL_QUESTIONS);
+    function startQuiz(focus = true, firstGod = null) {
+      questions = firstGod
+        ? [firstGod, ...shuffle(GODS.filter(god => god.id !== firstGod.id)).slice(0, TOTAL_QUESTIONS - 1)]
+        : shuffle(GODS).slice(0, TOTAL_QUESTIONS);
       current = 0; score = 0; history = [];
       $('result').hidden = true;
       $('quiz').hidden = false;
@@ -465,7 +473,7 @@
       $('quiz').scrollIntoView({block:'start', behavior:'instant'});
     });
     $('retry').addEventListener('click', () => startQuiz());
-    startQuiz(false);
+    startQuiz(false, getSharedGodFromUrl());
   </script>
   <style>#announcement{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}</style>
 </body>
