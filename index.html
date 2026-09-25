@@ -87,7 +87,7 @@
       <p class="score"><span id="score">0</span><small> / 5問</small></p>
       <p class="rank" id="rank"></p>
       <p class="result-message" id="result-message"></p>
-      <a class="share" id="share" target="_blank" rel="noopener noreferrer">𝕏 で結果を投稿する <span aria-hidden="true">↗</span></a>
+      <a class="share" id="share" target="_blank" rel="noopener noreferrer">最後の問題を𝕏でシェアする <span aria-hidden="true">↗</span></a>
       <button class="primary retry" id="retry" type="button">もう一度、挑戦する <span aria-hidden="true">↻</span></button>
       <details class="review" id="review"><summary>今回出会った神様を振り返る</summary><ol id="review-list"></ol></details>
     </section>
@@ -303,11 +303,7 @@
       $('reading-answer').textContent = `正しい読み：${god.reading}`;
       $('explanation').textContent = god.description;
       updateShareCard(god);
-      const questionIntent = new URL('https://twitter.com/intent/tweet');
-      questionIntent.searchParams.set('text', `『${god.name}』← この神様の名前、読めますか？\n【豆知識】${god.description}\n正解はこちらでチェック👇`);
-      questionIntent.searchParams.set('url', getShareUrl());
-      questionIntent.searchParams.set('hashtags', '日本神話,漢字クイズ');
-      $('question-share').href = questionIntent.href;
+      $('question-share').href = buildQuestionShareIntent(god);
       $('announcement').textContent = `${correct ? '正解です。' : '不正解です。'}正しい読みは、${god.reading}。`;
       // ライブ通知は読み上げ専用。視覚上の判定はfeedbackへ表示。
       $('feedback').hidden = false;
@@ -315,6 +311,14 @@
       $('next').innerHTML = `${current === TOTAL_QUESTIONS - 1 ? '結果を見る' : '次の問題へ'} <span aria-hidden="true">→</span>`;
       updateProgress();
       $('next').focus({preventScroll:true});
+    }
+    function buildQuestionShareText(god) {
+      return `『${god.name}』\nこの神様のお名前、読めますか？\n\n【豆知識】\n${god.description}\n\n4択から選んで挑戦！正解はこちら👇\n${getShareUrl()}\n\n#日本神話 #漢字クイズ #神クイズ`;
+    }
+    function buildQuestionShareIntent(god) {
+      const intent = new URL('https://twitter.com/intent/tweet');
+      intent.searchParams.set('text', buildQuestionShareText(god));
+      return intent.href;
     }
     // Canvasはブラウザ内の画像。Xのリンクプレビューには別途公開する
     // og-image.pngを使用します。個別カードは保存して投稿へ手動添付できます。
@@ -398,11 +402,8 @@
       $('score').textContent = score;
       $('rank').textContent = rank;
       $('result-message').textContent = message;
-      const intent = new URL('https://twitter.com/intent/tweet');
-      intent.searchParams.set('text', `『神様の名前、読めますか？』\n${TOTAL_QUESTIONS}問中${score}問正解！ 称号は「${rank}」でした。\nあなたも日本神話の漢字クイズに挑戦！`);
-      intent.searchParams.set('url', getShareUrl());
-      intent.searchParams.set('hashtags', '神様の名前読めますか,日本神話');
-      $('share').href = intent.href;
+      // 結果画面でも、最後に出題した神様を同じ形式でシェアする。
+      $('share').href = buildQuestionShareIntent(questions[current]);
       $('review').open = false;
       $('review-list').replaceChildren(...history.map(({god, selected, correct}, index) => {
         const li = document.createElement('li');
