@@ -37,7 +37,7 @@
     .feedback{margin-top:24px;padding-top:21px;border-top:1px solid var(--line)}.judgment{font-family:var(--serif);color:var(--green);font-weight:700;font-size:20px;margin:0 0 8px}.judgment.incorrect{color:var(--red)}.reading-answer{margin:0 0 12px;font-size:13px;overflow-wrap:anywhere}.lore{background:#f6f3ec;padding:17px 20px;border-left:2px solid #bc9c62}.lore-label{font-size:10px;color:#7a6543;letter-spacing:.16em}.lore p{margin:5px 0 0;font-size:13px;line-height:1.95}.primary,.share{display:flex;align-items:center;justify-content:center;gap:20px;width:100%;min-height:52px;border-radius:3px;text-decoration:none;font-size:14px;letter-spacing:.07em}.primary{background:var(--red);color:#fff;border:1px solid var(--red);margin-top:22px}.primary span{margin-left:auto}.primary.next{justify-content:space-between;padding:10px 21px}.support-row{display:flex;justify-content:center;gap:25px;margin:22px 0 27px;color:var(--muted);font-size:11px;letter-spacing:.03em}.support-row span+span{border-left:1px solid #d8d0c1;padding-left:25px}
     .result{text-align:center}.result-kicker{font-size:11px;color:var(--red);letter-spacing:.22em;margin:0 0 6px}.result h2{font-family:var(--serif);font-size:24px;margin:0;outline:none}.score{font-family:Georgia,serif;font-size:76px;color:var(--red);line-height:1.2;margin:20px 0 12px}.score small{font-size:23px;color:var(--muted)}.rank{display:inline-block;font-family:var(--serif);border-top:1px solid #c6af83;border-bottom:1px solid #c6af83;padding:10px 18px;font-size:21px;color:#755e36;letter-spacing:.05em;margin:0}.result-message{font-size:13px;color:var(--muted);margin:18px 0 24px}.share{background:#292925;color:white;border:1px solid #292925}.retry{margin-top:12px}.review{text-align:left;margin:24px 0 0;border-top:1px solid var(--line);padding-top:15px}.review summary{cursor:pointer;font-size:12px;color:var(--muted)}.review ol{padding:0;list-style:none;margin:10px 0 0}.review li{padding:12px 0;border-bottom:1px solid var(--line);font-size:12px}.review strong{display:block;overflow-wrap:anywhere}.review p{margin:4px 0;color:var(--muted)}.review .ok{color:var(--green)}.review .ng{color:var(--red)}
     .ad-space{height:90px;width:100%;display:flex;align-items:center;justify-content:center;border:1px dashed #dcd5c7;background:#efebe340;color:#938a7a;font-size:9px;letter-spacing:.24em;margin:0 auto 25px}.site-footer{max-width:824px;margin:auto;text-align:center;padding:0 24px 27px;color:var(--muted);font-size:10px}.site-footer p{margin:6px 0}.site-footer a{text-underline-offset:3px;color:var(--muted)}.footer-sign{margin-top:18px!important;letter-spacing:.22em;color:#948774}.noscript{padding:20px;border:1px solid var(--red);color:var(--red);text-align:center}
-    .question-share{margin-top:18px;padding:10px 14px;gap:10px;font-size:13px;letter-spacing:.03em}
+    .question-share{margin-top:18px;padding:10px 14px;gap:10px;font-size:13px;letter-spacing:.03em}.result .share{margin-top:12px}.result #result-share-hint{margin:0 0 12px}
     .share-preview{margin:22px 0 0}.share-preview canvas{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:3px}.share-preview figcaption{font-size:11px;color:var(--muted);margin-top:9px}.image-download{display:flex;justify-content:center;align-items:center;min-height:48px;margin-top:12px;padding:10px;border:1px solid #b9a37e;border-radius:3px;text-decoration:none;color:#755e36;font-size:13px}.image-download:hover{background:#f6f0e4}.image-status{font-size:12px;color:var(--muted);margin:8px 0 0}
     @media(hover:hover){.choice:not(:disabled):hover{background:#f9f1e8;border-color:#b99c74;transform:translateY(-1px)}.primary:hover{background:#892b25}.share:hover{background:#45453e}}
     @media(max-width:600px){.site-header{padding:18px 20px}.header-note{font-size:9px;letter-spacing:.05em}.brand{font-size:13px}.brand svg{width:24px}main{padding:28px 18px 0}.intro{margin-bottom:25px}.intro h1{letter-spacing:.01em}.subtitle{font-size:12px;letter-spacing:.07em}.intro-copy{font-size:11px}.card{padding:27px 20px 25px}.choices{grid-template-columns:1fr;gap:10px}.choice{min-height:58px}.question-heading{margin-bottom:23px}.god-name{font-size:34px}.god-name.long{font-size:26px}.support-row{gap:14px;font-size:10px}.support-row span+span{padding-left:14px}.rank{font-size:19px}.lore{padding:14px 16px}.ad-space{height:70px}}
@@ -72,11 +72,11 @@
           <div class="lore"><span class="lore-label">神話のこぼれ話</span><p id="explanation"></p></div>
           <figure class="share-preview" id="share-preview" hidden>
             <canvas id="share-canvas" width="1200" height="630" role="img" aria-label="神様の名前と豆知識のシェア画像"></canvas>
-            <figcaption>答えを伏せた、神様の問題カード。画像を保存して、Xの投稿画面で添付できます。リンクのみの投稿には、クイズ共通の画像が表示されます。</figcaption>
+            <figcaption>答えを伏せた問題カードです。画像を保存してから、Xの投稿画面で添付してください。</figcaption>
           </figure>
-          <a class="image-download" id="image-download" hidden>問題カードを画像で保存（PNG）</a>
+          <a class="image-download" id="image-download" hidden>問題カードを保存（PNG）</a>
           <p class="image-status" id="image-status" role="status" hidden></p>
-          <a class="share question-share" id="question-share" target="_blank" rel="noopener noreferrer">この問題を𝕏でシェアする <span aria-hidden="true">↗</span></a>
+          <a class="share question-share" id="question-share" target="_blank" rel="noopener noreferrer">Xで投稿文を開く <span aria-hidden="true">↗</span></a>
           <button class="primary next" id="next" type="button">次の問題へ <span aria-hidden="true">→</span></button>
         </section>
       </div>
@@ -87,7 +87,9 @@
       <p class="score"><span id="score">0</span><small> / 5問</small></p>
       <p class="rank" id="rank"></p>
       <p class="result-message" id="result-message"></p>
-      <a class="share" id="share" target="_blank" rel="noopener noreferrer">最後の問題を𝕏でシェアする <span aria-hidden="true">↗</span></a>
+      <p class="result-message" id="result-share-hint">最後の問題カードを保存し、Xの投稿画面で添付してください。</p>
+      <a class="image-download" id="result-image-download" hidden>最後の問題カードを保存（PNG）</a>
+      <a class="share" id="share" target="_blank" rel="noopener noreferrer">Xで投稿文を開く <span aria-hidden="true">↗</span></a>
       <button class="primary retry" id="retry" type="button">もう一度、挑戦する <span aria-hidden="true">↻</span></button>
       <details class="review" id="review"><summary>今回出会った神様を振り返る</summary><ol id="review-list"></ol></details>
     </section>
@@ -404,6 +406,16 @@
       $('result-message').textContent = message;
       // 結果画面でも、最後に出題した神様を同じ形式でシェアする。
       $('share').href = buildQuestionShareIntent(questions[current]);
+      const resultImageDownload = $('result-image-download');
+      resultImageDownload.hidden = $('image-download').hidden;
+      resultImageDownload.removeAttribute('href');
+      $('result-share-hint').textContent = resultImageDownload.hidden
+        ? '最後の問題の投稿文をXで開きます。'
+        : '最後の問題カードを保存し、Xの投稿画面で添付してください。';
+      if (!resultImageDownload.hidden) {
+        resultImageDownload.href = $('image-download').href;
+        resultImageDownload.download = $('image-download').download;
+      }
       $('review').open = false;
       $('review-list').replaceChildren(...history.map(({god, selected, correct}, index) => {
         const li = document.createElement('li');
